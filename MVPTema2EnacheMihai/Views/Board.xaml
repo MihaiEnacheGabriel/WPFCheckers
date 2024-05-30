@@ -1,0 +1,79 @@
+﻿<Window x:Class="MVPTema2EnacheMihai.Views.Board"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MVPTema2EnacheMihai.ViewModels"
+        xmlns:models="clr-namespace:MVPTema2EnacheMihai.Models"
+        xmlns:resources="clr-namespace:MVPTema2EnacheMihai.Resources"
+        Title="Checkers Board" Height="580" Width="400">
+    <Window.DataContext>
+        <local:CheckerBoardViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <resources:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <resources:CellToColorConverter x:Key="CellToColorConverter"/>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <!-- Save Button -->
+        <Button Content="Save Game" Command="{Binding SaveGameCommand}" CommandParameter="savefile2"/>
+
+
+
+        <Label>
+            <TextBlock>
+                <Run Text="Player 1 (Red): "/>
+                <Run Text="{Binding PlayerOnePiecesCount, Mode=OneWay}"/>
+                <Run Text=" pieces left"/>
+            </TextBlock>
+        </Label>
+
+        <Label>
+            <TextBlock>
+                <Run Text="Player 2 (Black): "/>
+                <Run Text="{Binding PlayerTwoPiecesCount, Mode=OneWay}"/>
+                <Run Text=" pieces left"/>
+            </TextBlock>
+        </Label>
+        <Label Content="Current Turn:" Width="406"/>
+        <TextBlock Height="26" Width="234">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Text" Value="Player One's Turn" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPlayerOneTurn}" Value="False">
+                            <Setter Property="Text" Value="       Player Two's Turn" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <ItemsControl ItemsSource="{Binding Cells}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="8" Columns="8"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="50" Height="50" 
+                            Command="{Binding DataContext.CellClickedCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                            CommandParameter="{Binding}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{StaticResource CellToColorConverter}">
+                                            <Binding Path="IsDark"/>
+                                            <Binding Path="IsAvailable"/>
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <!-- -->
+                        <Ellipse Fill="{Binding Pieces.Color}" Width="38" Height="38" Visibility="{Binding Pieces, Converter={StaticResource NullToVisibilityConverter}}"/>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</Window>

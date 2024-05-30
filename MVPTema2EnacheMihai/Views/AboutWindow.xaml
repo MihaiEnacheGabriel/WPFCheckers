@@ -1,0 +1,18 @@
+﻿<Window x:Class="MVPTema2EnacheMihai.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About" Height="500" Width="400">
+    <Grid>
+        <TextBlock TextWrapping="Wrap">
+            <LineBreak/>
+            <LineBreak/>
+            Creator: Enache Mihai <LineBreak/><LineBreak/>
+            Email: mihai-gabriel.enache@student.unitbv.ro<LineBreak/><LineBreak/>
+            Group: 10LF321<LineBreak/><LineBreak/>
+            Description: Jocul de Dame este un joc simplu bazat pe sarituri in diagonala. Fiecare jucator primeste un set de piese puse pe diagonala una fata de cealalta.
+            La o mutare, piesa se misca pe diagonala (in fata) o casuta. In cazul in care o piesa a adversarului se afla pe una din aceste pozitii disponibile,
+            piesa sare peste aceasta si o captureaza. In cazul in care o piesa ajunge pe marginea opusa, aceasta devine rege si se poate muta in toate cele 4
+            diagonale, tot cate o casuta. Primul jucator fara piese pierde.
+        </TextBlock>
+    </Grid>
+</Window>

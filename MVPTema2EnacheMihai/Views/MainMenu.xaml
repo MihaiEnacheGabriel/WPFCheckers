@@ -1,0 +1,24 @@
+﻿<Window x:Class="MVPTema2EnacheMihai.Views.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MVPTema2EnacheMihai.ViewModels"
+        Title="Checkers Main Menu" Height="200" Width="300">
+    <Window.DataContext>
+        <local:MainMenuViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New Game" Command="{Binding NewGameCommand}"/>
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Open" Command="{Binding LoadGameCommand}"/>
+                <MenuItem Header="Allow Multiple Jump"/>
+                <MenuItem Header="Statistics" Command="{Binding StatisticsViewCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Command="{Binding ShowAboutInfoCommand}"/>
+            </MenuItem>
+        </Menu>
+        <TextBlock Text="Dame" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
+    </Grid>
+</Window>
